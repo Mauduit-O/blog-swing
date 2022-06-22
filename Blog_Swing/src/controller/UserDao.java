@@ -21,12 +21,13 @@ public class UserDao implements Idao<User> {
 	@Override
 	public boolean create(User user) {
 		try { 
-			PreparedStatement insert_user = connect.prepareStatement("INSERT INTO user (nom, prenom, email, pwd) VALUES (?,?,?,PASSWORD(?))");
+			PreparedStatement insert_user = connect.prepareStatement("INSERT INTO user (nom, prenom, email, pwd, admin) VALUES (?,?,?,PASSWORD(?), ?)");
 	
 				insert_user.setString(1, user.getNom());
 				insert_user.setString(2, user.getPrenom());
 				insert_user.setString(3, user.getMail());
 				insert_user.setString(4, user.getPwd());
+				insert_user.setBoolean(5, user.isAdmin());
 				insert_user.executeUpdate();
 				
 		} catch (SQLException e) {
@@ -50,7 +51,8 @@ public class UserDao implements Idao<User> {
 				user.setPrenom(rs.getString("prenom"));
 				user.setMail(rs.getString("email"));
 				user.setPwd(rs.getString("pwd"));
-			}
+				user.setAdmin(rs.getBoolean("admin"));
+			} System.out.println(user);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -111,6 +113,7 @@ public class UserDao implements Idao<User> {
 				user.setPrenom(rs.getString("prenom"));
 				user.setMail(rs.getString("email"));
 				user.setPwd(rs.getString("pwd"));
+				user.setAdmin(rs.getBoolean("admin"));
 			}
 			
 		} catch (SQLException e) {

@@ -185,7 +185,7 @@ public class Article_details extends JPanel {
 		});
 	
 		ArrayList<JTextPane> liste = new ArrayList<JTextPane>();
-		List<Commentaire> comm = comDao.read();
+		List<Commentaire> comm = comDao.read(article_id);
 			for (int i = 0; i < comm.size(); i++) {
 				String dateFormat = new SimpleDateFormat("dd/MM/yyyy").format((Date)comm.get(i).getDate_com());
 				JTextPane jpostUser  = new JTextPane();

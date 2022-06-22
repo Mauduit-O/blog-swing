@@ -120,6 +120,12 @@ public class Post extends JPanel {
 				panel_tableau.revalidate();	
 			}
 		});
+		
+		if (user.isAdmin() == true) {
+			System.out.println("coucou admin");
+		}
+		System.out.println("admin: " +user.isAdmin());
+	
 	}
 	
 	public DefaultTableModel liste() {
@@ -141,5 +147,7 @@ public class Post extends JPanel {
 					 });
 		}
 		return tab;
+		
 		}
+	
 }

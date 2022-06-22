@@ -25,6 +25,7 @@ import java.awt.Font;
 import javax.swing.UIManager;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JCheckBox;
 
 public class Blog extends JFrame {
 
@@ -117,11 +118,15 @@ public class Blog extends JFrame {
 		contentPane_register.add(layer_inscription);
 		layer_inscription.setLayout(null);
 		
-		
 		panel_inscription.setLayout(null);
 		panel_inscription.setBackground(new Color(255, 240, 245));
 		panel_inscription.setBounds(0, 0, 1400, 805);
 		layer_inscription.add(panel_inscription);
+		
+		JLabel RegisterTitle = new JLabel("Inscription");
+		RegisterTitle.setFont(new Font("Avenir", Font.PLAIN, 34));
+		RegisterTitle.setBounds(616, 78, 194, 27);
+		panel_inscription.add(RegisterTitle);
 		
 		JLabel name = new JLabel("Nom");
 		name.setFont(new Font("Avenir", Font.PLAIN, 16));
@@ -167,17 +172,27 @@ public class Blog extends JFrame {
 		input_mdp.setBounds(655, 438, 266, 37);
 		panel_inscription.add(input_mdp);
 		
+		JCheckBox admin = new JCheckBox("   Admin");
+		admin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		admin.setFont(new Font("Avenir", Font.BOLD, 16));
+		admin.setBackground(Color.WHITE);
+		admin.setBounds(461, 521, 113, 37);
+		panel_inscription.add(admin);
+		
 		JButton btn_creer = new JButton("CRÉER MON COMPTE");
 		btn_creer.setBorder(null);
 		btn_creer.setFont(new Font("Avenir", Font.BOLD, 12));
 		btn_creer.setBackground(new Color(255, 255, 255));
-		btn_creer.setBounds(607, 569, 178, 43);
+		btn_creer.setBounds(616, 596, 178, 43);
 	
 		btn_creer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserDao userDao = new UserDao();
-				User user = new User(input_name.getText(), input_prenom.getText(), Input_mail.getText(), String.valueOf(input_mdp.getPassword()));
-				System.out.println(user);
+				User user = new User(input_name.getText(), input_prenom.getText(), Input_mail.getText(), String.valueOf(input_mdp.getPassword()), admin.isSelected());
 				Pattern ptr = Pattern.compile("^[a-zA-Z0-9_.-]+[@][a-zA-Z0-9-]+[.]+[a-zA-Z0-9]+$");
 				
 				if(!ptr.matcher(Input_mail.getText()).matches()) {
@@ -200,11 +215,6 @@ public class Blog extends JFrame {
 			}
 		});
 		panel_inscription.add(btn_creer);
-		
-		JLabel RegisterTitle = new JLabel("Inscription");
-		RegisterTitle.setFont(new Font("Avenir", Font.PLAIN, 34));
-		RegisterTitle.setBounds(616, 78, 194, 27);
-		panel_inscription.add(RegisterTitle);
 
 	}
 }

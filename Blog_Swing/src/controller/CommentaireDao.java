@@ -35,18 +35,19 @@ public class CommentaireDao implements Idao<Commentaire>{
 		return bool;
 	}
 	
-	public List<Commentaire> read() {
+	public List<Commentaire> read(int article_id) {
 		List<Commentaire> listeCom = new ArrayList<>();
 		
 		try {
-			PreparedStatement req = connect.prepareStatement("SELECT * FROM commentaires INNER JOIN user On user.id=commentaires.auteur"
-					+ " INNER JOIN article ON commentaires.art_id = article.id ");
+			PreparedStatement req = connect.prepareStatement("	SELECT *, u.id AS user FROM commentaires c, user u WHERE art_id =? AND "
+					+ "c.auteur = u.id");
 			
-			//"SELECT * FROM commentaires INNER JOIN user On user.id=commentaires.auteur"
-			//+ " INNER JOIN article Where commentaires.art_id = article.id "
+			req.setInt(1, article_id);
 			
 			ResultSet rs = req.executeQuery();
-	
+			
+			System.out.println(req);
+			
 			while(rs.next()) {
 				Date sqlDate = (rs.getDate("date"));
 				
@@ -54,7 +55,7 @@ public class CommentaireDao implements Idao<Commentaire>{
 						rs.getInt("id"),
 						rs.getString("commentaire"),
 						sqlDate,
-						new User(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email")),
+						new User(rs.getInt("user"), rs.getString("nom"), rs.getString("prenom"), rs.getString("email")),
 						rs.getInt("art_id")
 						
 					); 
