@@ -78,7 +78,6 @@ public class Add_article extends JPanel {
 				String contenu = input_contenu.getText();
 				
 				Article addarticle = new Article(titre, resume, contenu, user);
-				//System.out.println(user);
 				ArticleDao artDao = new ArticleDao();
 				
 				if (artDao.create(addarticle)) {

@@ -46,6 +46,14 @@ public class Post extends JPanel {
 		add(panel_tableau);
 		panel_tableau.setLayout(null);
 		
+		if (user.isAdmin() == true) {
+		panel_tableau.removeAll();
+		Admin admin = new Admin(user);
+		panel_tableau.add(admin);
+		panel_tableau.repaint();
+		panel_tableau.revalidate();
+	}
+		
 		JLabel title_tableau = new JLabel("Hello " + user.getPrenom());
 		title_tableau.setHorizontalAlignment(SwingConstants.CENTER);
 		title_tableau.setFont(new Font("Montserrat", Font.PLAIN, 34));
@@ -53,6 +61,7 @@ public class Post extends JPanel {
 		panel_tableau.add(title_tableau);
 		
 		JButton btn_add_art = new JButton("New article");
+		btn_add_art.setBorder(null);
 		btn_add_art.setBackground(new Color(255, 240, 245));
 		btn_add_art.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,24 +131,6 @@ public class Post extends JPanel {
 				panel_tableau.revalidate();	
 			}
 		});
-		
-		if (user.isAdmin() == true) {
-			ArticleDao readArt = new ArticleDao();
-			List<Article> listArticle = new ArrayList<>();
-			listArticle.addAll(readArt.read());
-			
-			UserDao userDao = new UserDao();
-			ArrayList<User> listUser = new ArrayList<>();
-			listUser.addAll(userDao.read());
-
-			
-			
-			JLabel Nbr_art_user = new JLabel("NOMBRE D'ARTICLE: " + listArticle.size() + "     NOMBRE D'UTILISATEUR: " + listUser.size() );
-			Nbr_art_user.setFont(new Font("Avenir", Font.PLAIN, 16));
-			Nbr_art_user.setBounds(57, 634, 650, 34);
-			panel_tableau.add(Nbr_art_user);
-		}
-		System.out.println("admin: " +user.isAdmin());
 	
 	}
 	

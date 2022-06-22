@@ -56,69 +56,66 @@ public class Article_details extends JPanel {
 		
 		JLabel titre = new JLabel("Titre");
 		titre.setFont(new Font("Avenir", Font.PLAIN, 22));
-		titre.setBounds(127, 106, 88, 31);
+		titre.setBounds(128, 65, 88, 31);
 		panel_article.add(titre);
 		
 		input_titre = new JTextField();
-		input_titre.setBounds(260, 101, 332, 45);
+		input_titre.setBounds(261, 60, 332, 45);
 		input_titre.setBorder(null);
 		panel_article.add(input_titre);
 		input_titre.setColumns(10);
 		
 		JLabel resume = new JLabel("Résumé");
 		resume.setFont(new Font("Avenir", Font.PLAIN, 22));
-		resume.setBounds(127, 178, 88, 31);
+		resume.setBounds(128, 137, 88, 31);
 		panel_article.add(resume);
 		
 		input_auteur = new JTextField();
 		input_auteur.setColumns(10);
-		input_auteur.setBounds(260, 376, 332, 45);
+		input_auteur.setBounds(261, 335, 332, 45);
 		input_auteur.setBorder(null);
 		panel_article.add(input_auteur);
 		
 		JLabel lblAuteur = new JLabel("Auteur");
 		lblAuteur.setFont(new Font("Avenir", Font.PLAIN, 22));
-		lblAuteur.setBounds(127, 388, 88, 16);
+		lblAuteur.setBounds(128, 347, 88, 16);
 		panel_article.add(lblAuteur);
 		
 		input_date = new JTextField();
 		input_date.setColumns(10);
-		input_date.setBounds(260, 453, 332, 45);
+		input_date.setBounds(261, 412, 332, 45);
 		input_date.setBorder(null);
 		panel_article.add(input_date);
 		
 		JLabel lblDate = new JLabel("Date");
 		lblDate.setFont(new Font("Avenir", Font.PLAIN, 22));
-		lblDate.setBounds(127, 458, 103, 31);
+		lblDate.setBounds(128, 417, 103, 31);
 		panel_article.add(lblDate);
 		
 		JLabel lblContenu = new JLabel("Contenu");
 		lblContenu.setFont(new Font("Avenir", Font.PLAIN, 22));
-		lblContenu.setBounds(127, 548, 88, 22);
+		lblContenu.setBounds(128, 507, 88, 22);
 		panel_article.add(lblContenu);
 		
 		JTextArea input_resume = new JTextArea();
-		input_resume.setBounds(260, 178, 332, 157);
+		input_resume.setBounds(261, 137, 332, 157);
 		panel_article.add(input_resume);
 		
 		JTextArea input_contenu = new JTextArea();
-		input_contenu.setBounds(260, 544, 332, 157);
+		input_contenu.setBounds(261, 503, 332, 157);
 		panel_article.add(input_contenu);
 		
-		JLabel lRetour = new JLabel("RETOUR");
-		lRetour.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				panel.removeAll();
-				Post post = new Post(user);
-				panel.add(post);
-				panel.repaint();
-				panel.revalidate();
-			}
-		});
-		lRetour.setFont(new Font("Avenir", Font.PLAIN, 14));
-		lRetour.setBounds(34, 28, 122, 31);
-		panel_article.add(lRetour);
+		JButton btn_modifier = new JButton("MODIFIER");
+		btn_modifier.setFont(new Font("Avenir", Font.PLAIN, 14));
+		btn_modifier.setBackground(Color.WHITE);
+		btn_modifier.setBounds(261, 699, 143, 44);
+		panel_article.add(btn_modifier);
+		
+		JButton btn_supprimer = new JButton("SUPPRIMER");
+		btn_supprimer.setFont(new Font("Avenir", Font.PLAIN, 14));
+		btn_supprimer.setBackground(Color.WHITE);
+		btn_supprimer.setBounds(450, 699, 143, 44);
+		panel_article.add(btn_supprimer);
 		
 		ArticleDao articleDao = new ArticleDao();
 		ArrayList<Article> list = new ArrayList<>();
@@ -139,21 +136,21 @@ public class Article_details extends JPanel {
 		
 		JLabel lblCommentaire = new JLabel("Commentaires");
 		lblCommentaire.setFont(new Font("Avenir", Font.PLAIN, 32));
-		lblCommentaire.setBounds(236, 41, 217, 70);
+		lblCommentaire.setBounds(234, 8, 217, 70);
 		panel_commentaire.add(lblCommentaire);
 		
 		JLabel lbladd_commentaire = new JLabel("Écriver votre commentaire");
 		lbladd_commentaire.setFont(new Font("Avenir", Font.PLAIN, 18));
-		lbladd_commentaire.setBounds(45, 473, 257, 25);
+		lbladd_commentaire.setBounds(43, 440, 257, 25);
 		panel_commentaire.add(lbladd_commentaire);
 		
 		JTextArea input_add_com = new JTextArea();
-		input_add_com.setBounds(45, 510, 567, 153);
+		input_add_com.setBounds(43, 477, 567, 153);
 		panel_commentaire.add(input_add_com);
 
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(52, 123, 537, 289);
+		scrollPane.setBounds(43, 90, 544, 289);
 		panel_commentaire.add(scrollPane);
 		//scrollPane.setWheelScrollingEnabled(true);
 		JPanel container_com = new JPanel();
@@ -167,8 +164,23 @@ public class Article_details extends JPanel {
 		JButton btn_add_com = new JButton("AJOUTER");
 		btn_add_com.setBackground(new Color(255, 255, 255));
 		btn_add_com.setFont(new Font("Avenir", Font.PLAIN, 14));
-		btn_add_com.setBounds(283, 695, 143, 44);
+		btn_add_com.setBounds(281, 662, 143, 44);
 		panel_commentaire.add(btn_add_com);
+		
+		JLabel lRetour = new JLabel("RETOUR");
+		lRetour.setBounds(518, 10, 122, 31);
+		panel_commentaire.add(lRetour);
+		lRetour.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panel.removeAll();
+				Post post = new Post(user);
+				panel.add(post);
+				panel.repaint();
+				panel.revalidate();
+			}
+		});
+		lRetour.setFont(new Font("Avenir", Font.PLAIN, 14));
 		
 		btn_add_com.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

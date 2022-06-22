@@ -5,12 +5,15 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import controller.ArticleDao;
 import controller.UserDao;
+import model.Article;
 import model.User;
 
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
@@ -28,7 +31,7 @@ public class Login extends JPanel {
 	private JTextField input_email;
 	private JPasswordField input_pwd;
 
-	public Login() {
+	public Login(User user) {
 		setBackground(new Color(255, 240, 245));
 		setLayout(null);
 		setBounds(0, 55, 1400, 805);
@@ -72,14 +75,12 @@ public class Login extends JPanel {
 				String pwd_saisie = String.valueOf(input_pwd.getPassword());
 
 				UserDao usDao = new UserDao();
-
 				if(usDao.verifLogin(email_saisie, pwd_saisie)) {
-					panel_connection.removeAll();
-					Post post = new Post(usDao.UserByMail(email_saisie));
-					panel_connection.add(post);
-					panel_connection.repaint();
-					panel_connection.revalidate();
-
+						panel_connection.removeAll();
+						Post post = new Post(usDao.UserByMail(email_saisie));
+						panel_connection.add(post);
+						panel_connection.repaint();
+						panel_connection.revalidate();
 				}else {
 					JOptionPane.showMessageDialog(null, "Impossible de se connecter");
 				}

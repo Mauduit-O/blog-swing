@@ -43,10 +43,7 @@ public class CommentaireDao implements Idao<Commentaire>{
 					+ "c.auteur = u.id");
 			
 			req.setInt(1, article_id);
-			
 			ResultSet rs = req.executeQuery();
-			
-			System.out.println(req);
 			
 			while(rs.next()) {
 				Date sqlDate = (rs.getDate("date"));
@@ -63,8 +60,7 @@ public class CommentaireDao implements Idao<Commentaire>{
 			} 
 		}catch(Exception e) {
 			e.printStackTrace();
-			
-		}System.out.println(listeCom);
+		}
 		return listeCom;
 	}
 	

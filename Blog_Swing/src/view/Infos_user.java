@@ -138,7 +138,7 @@ public class Infos_user extends JPanel {
 				usdDao.delete(user.getId());
 				JOptionPane.showMessageDialog(null, "Au revoir , " + user.getPrenom() + "! \n votre compte à été supprimé.");
 				panel.removeAll();
-				Login login = new Login();
+				Login login = new Login(user);
 				panel.add(login);
 				panel.repaint();
 				panel.revalidate();

@@ -84,6 +84,7 @@ public class UserDao implements Idao<User> {
 	
 	
 	public boolean verifLogin(String mail, String password) {
+		User user = new User();
 		Boolean bool = false;
 		try {
 			PreparedStatement verifLog = connect.prepareStatement("SELECT * FROM user WHERE email=? AND pwd=PASSWORD(?) ");
@@ -93,6 +94,12 @@ public class UserDao implements Idao<User> {
 			ResultSet rs = verifLog.executeQuery();
 			
 			if(rs.next()) {
+				user.setId(rs.getInt("id"));
+				user.setNom(rs.getString("nom"));
+				user.setPrenom(rs.getString("prenom"));
+				user.setMail(rs.getString("email"));
+				user.setPwd(rs.getString("pwd"));
+				user.setAdmin(rs.getBoolean("admin"));
 				bool = true;
 			}
 		} catch (SQLException e) {
@@ -103,6 +110,7 @@ public class UserDao implements Idao<User> {
 	
 	
 	public Boolean verifMail(String mail) {
+		User user = new User();
 		Boolean bool = false;
 		try {
 			PreparedStatement verifEmail = connect.prepareStatement("SELECT * FROM user WHERE email=? ");
@@ -111,6 +119,12 @@ public class UserDao implements Idao<User> {
 			ResultSet rs = verifEmail.executeQuery();
 			
 			if(rs.next()) {
+				user.setId(rs.getInt("id"));
+				user.setNom(rs.getString("nom"));
+				user.setPrenom(rs.getString("prenom"));
+				user.setMail(rs.getString("email"));
+				user.setPwd(rs.getString("pwd"));
+				user.setAdmin(rs.getBoolean("admin"));
 			bool = true;
 			}
 			

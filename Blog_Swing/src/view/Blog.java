@@ -34,6 +34,7 @@ public class Blog extends JFrame {
 	private JTextField input_prenom;
 	private JTextField Input_mail;
 	private JPasswordField input_mdp;
+	private User user;
 	
 
 	/**
@@ -102,7 +103,7 @@ public class Blog extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				panel_inscription.removeAll();
-				Login login = new Login();
+				Login login = new Login(user);
 				panel_inscription.add(login);
 				panel_inscription.repaint();
 				panel_inscription.revalidate();
@@ -204,7 +205,7 @@ public class Blog extends JFrame {
 						JOptionPane.showMessageDialog(null, "Bienvenue , " + input_prenom.getText() + "! \n votre compte à été créé.");
 						
 						panel_inscription.removeAll();
-						Login login = new Login();
+						Login login = new Login(user);
 						panel_inscription.add(login);
 						panel_inscription.repaint();
 						panel_inscription.revalidate();
