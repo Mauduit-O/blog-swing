@@ -1,0 +1,113 @@
+package view;
+
+import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
+import java.awt.Color;
+import javax.swing.JTable;
+import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+
+import controller.ArticleDao;
+import model.Article;
+import model.User;
+
+import java.awt.ScrollPane;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+
+public class Post extends JPanel {
+	private JTable table_1;
+ 
+	public Post(User user) {
+		setBackground(new Color(255, 255, 255));
+		setBounds(0, 0,  1400, 805);
+		setLayout(null);
+		
+		JPanel panel_tableau = new JPanel();
+		panel_tableau.setBackground(new Color(255, 255, 255));
+		panel_tableau.setBounds(0, 6,  1400, 805);
+		add(panel_tableau);
+		panel_tableau.setLayout(null);
+		
+		JLabel title_tableau = new JLabel("Hello " + user.getPrenom());
+		title_tableau.setFont(new Font("Montserrat", Font.PLAIN, 34));
+		title_tableau.setBounds(424, 35, 488, 30);
+		panel_tableau.add(title_tableau);
+		
+		JPanel tableau = new JPanel();
+		tableau.setBackground(new Color(255, 240, 245));
+		tableau.setBounds(57, 109, 1300, 505);
+		panel_tableau.add(tableau);
+		tableau.setLayout(null);
+		
+//		String [] header = {"Titre","Résumé","Contenu", "Date création", "Auteur","Show"};
+//		String[][] data ={
+//				{"book","bk","cvbv","fgh","fghj","Détails"},
+//				{"book","bk","cvbv","fgh","fghj","Détails"}
+//		} ;
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(0, 0, 1300, 511);
+		tableau.add(scrollPane_1);
+		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		table_1.setBackground(new Color(255, 240, 245));
+		
+		table_1.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"New column", "New column", "New column", "New column", "New column", "New column", "New column"
+				}
+			));
+		
+		
+		JButton btn_add_art = new JButton("New article");
+		btn_add_art.setBackground(new Color(255, 240, 245));
+		btn_add_art.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel_tableau.removeAll();
+				Add_article addArticle = new Add_article(user);
+				panel_tableau.add(addArticle);
+				panel_tableau.repaint();
+				panel_tableau.revalidate();
+			}
+		});
+		btn_add_art.setBounds(615, 675, 169, 55);
+		panel_tableau.add(btn_add_art);
+	}
+	
+	public DefaultTableModel liste() {
+		
+		String [] col = {"ID","Titre","Résumé", "Date création", "Auteur","Show"};
+		DefaultTableModel tab = new DefaultTableModel(null, col);
+		
+		ArticleDao readArt = new ArticleDao();
+		
+		List<Article> listArticle = new ArrayList<>();
+		listArticle.addAll(readArt.readd());
+		
+		for (Article article : listArticle) {
+			 
+			 tab.addRow(new Object[] {
+					 article.getId(),
+					 article.getTitre(),
+					 article.getResume(),article.getDate_creation(),article.getAuteur().getPrenom(), "Détail"
+					 });
+			 
+			 System.out.println(article);
+			 System.out.println(listArticle);
+		}
+		 System.out.println(listArticle);
+		System.out.println(tab);
+		return tab;
+		
+	}
+}

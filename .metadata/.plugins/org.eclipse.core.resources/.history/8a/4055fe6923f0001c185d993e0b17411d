@@ -1,0 +1,65 @@
+package model;
+
+public class User {
+	private int id;
+	private String nom;
+	private static String prenom;
+	private String mail;
+	private String pwd;
+	
+	public User() {
+	}
+	
+	public User(int id, String nom, String prenom, String mail, String pwd) {
+		this.id = id;
+		this.nom = nom;
+		User.prenom = prenom;
+		this.mail = mail;
+		this.pwd = pwd;
+	}
+	
+	public User(String nom, String prenom, String mail, String pwd) {
+		this.nom = nom;
+		User.prenom = prenom;
+		this.mail = mail;
+		this.pwd = pwd;
+	}
+	
+	public User(String mail, String pwd) {
+		this.mail = mail;
+		this.pwd = pwd;
+	}
+	
+	public User(String mail) {
+		this.mail = mail;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public static String getPrenom() {
+		return prenom;
+	}
+	public void setPrenom(String prenom) {
+		User.prenom = prenom;
+	}
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+	public String getPwd() {
+		return pwd;
+	}
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	
+}

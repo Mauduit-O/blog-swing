@@ -1,0 +1,29 @@
+package controller;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import Dao.Database_connection;
+import model.Commentaire;
+
+public class CommentaireDao {
+	
+	Connection connect = new Database_connection().getConnection();
+	
+	public Boolean creatCom(Commentaire commentaire) {
+		Boolean bool = false;
+		try {
+			PreparedStatement create_article = connect.prepareStatement("INSERT INTO commentaire (commentaire, date, auteur) VALUES (?,now(),?)");
+			create_article.setString(1, commentaire.getCommentaire());
+			create_article.setObject(2, commentaire.getAuteur().getId());
+			create_article.executeUpdate();
+			bool = true;
+			
+			} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bool;
+	}
+
+}

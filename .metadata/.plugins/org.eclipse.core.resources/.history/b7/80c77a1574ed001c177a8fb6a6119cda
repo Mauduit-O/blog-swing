@@ -1,0 +1,95 @@
+package controller;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import Dao.Database_connection;
+import Dao.Idao;
+import model.Article;
+
+public class ArticleDao implements Idao<Article> {
+
+	Connection connect = new Database_connection().getConnection();
+	@Override
+	public boolean create(Article article) {
+		
+		try {
+			PreparedStatement create_article = connect.prepareStatement("INSERT INTO article (titre, resume, contenu, date_creation, auteur) VALUES (?,?,?,?,?)");
+			create_article.setString(1, article.getTitre());
+			create_article.setString(2, article.getResume());
+			create_article.setString(3, article.getContenu());
+			create_article.setString(4, article.getDate_creation());
+			create_article.setString(5, article.getAuteur());
+			create_article.executeUpdate();
+			
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public ArrayList<Article> read() {
+		
+		ArrayList<Article> liste_article = new ArrayList<>();
+		
+		try {
+			PreparedStatement read_article = connect.prepareStatement("SELECT * FROM article");
+			ResultSet rs = read_article.executeQuery();
+			
+			while (rs.next()) {
+				Article article = new Article();
+				
+				article.setId(rs.getInt("id"));
+				article.setTitre(rs.getString("titre"));
+				article.setResume(rs.getString("resume"));
+				article.setContenu(rs.getString("contenu"));
+				article.setDate_creation(rs.getString("date_creation"));
+				article.setAuteur(rs.getString("auteur"));
+				
+				liste_article.add(article);
+			}
+			read_article.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("l'affichage n'a pas été effectuer");
+		}
+		return liste_article;
+	}
+	
+public ArrayList<Article> findById(int i) {
+		
+		ArrayList<Article> liste_article = new ArrayList<>();
+		
+		try {
+			PreparedStatement read_article = connect.prepareStatement("SELECT * FROM article WHERE id = ?");
+			read_article.setInt(1, i);
+			ResultSet rs = read_article.executeQuery();
+			
+			while (rs.next()) {
+				Article article = new Article();
+				
+				article.setId(rs.getInt("id"));
+				article.setTitre(rs.getString("titre"));
+				article.setResume(rs.getString("resume"));
+				article.setContenu(rs.getString("contenu"));
+				article.setDate_creation(rs.getString("date_creation"));
+				article.setAuteur(rs.getString("auteur"));
+				
+				liste_article.add(article);
+			}
+			read_article.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("l'affichage n'a pas été effectuer");
+		}
+		return liste_article;
+	}
+
+}

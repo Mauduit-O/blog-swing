@@ -1,0 +1,35 @@
+package view;
+
+import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
+import java.awt.Color;
+import javax.swing.JTable;
+import java.awt.ScrollPane;
+
+public class Post extends JPanel {
+	private JTable table;
+
+	/**
+	 * Create the panel.
+	 */
+	public Post() {
+		setBackground(new Color(245, 255, 250));
+		setLayout(null);
+		
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setBounds(0, 0, 652, 525);
+		add(scrollPane);
+		
+		String [] header = {"ID","Titre","Résumé", "Date création", "Auteur","Show"};
+        String[][] data ={
+                {"1","book","bk","cvbv","fgh","fghj"},
+                {"2","book","bk","cvbv","fgh","fghj"}
+        } ;
+		
+		table = new JTable(data, header);
+		table.setBackground(new Color(255, 240, 245));
+		table.setBounds(0, 0, 652, 525);
+		add(table);
+
+	}
+}

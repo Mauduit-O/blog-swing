@@ -1,0 +1,91 @@
+package view;
+
+import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
+import java.awt.Color;
+import javax.swing.JTable;
+import java.awt.ScrollPane;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Post extends JPanel {
+	private JTable table;
+	private JTable table_1;
+
+	/**
+	 * Create the panel.
+	 */
+	//	public Post(User user) {
+	public Post() {
+		setLayout(null);
+		
+		JPanel panel_tableau = new JPanel();
+		panel_tableau.setBackground(new Color(255, 255, 255));
+		panel_tableau.setBounds(0,0, 591, 502);
+		add(panel_tableau);
+		panel_tableau.setLayout(null);
+		
+		JLabel title_tableau = new JLabel("Hello");
+		title_tableau.setFont(new Font("Montserrat", Font.PLAIN, 24));
+		title_tableau.setBounds(267, 29, 98, 30);
+		panel_tableau.add(title_tableau);
+		
+		JPanel tableau = new JPanel();
+		tableau.setBackground(new Color(255, 240, 245));
+		tableau.setBounds(16, 87, 558, 289);
+		panel_tableau.add(tableau);
+		tableau.setLayout(null);
+		
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setBounds(0, 0, 558, 289);
+		tableau.add(scrollPane);
+		
+		String [] header = {"ID","Titre","Résumé", "Date création", "Auteur","Show"};
+		String[][] data ={
+				{"1","book","bk","cvbv","fgh","fghj"},
+				{"2","book","bk","cvbv","fgh","fghj"}
+		} ;
+		
+		table_1 = new JTable(data, header);
+		table_1.setBackground(new Color(255, 240, 245));
+		table_1.setBounds(0, 0, 558, 289);
+		tableau.add(table_1);
+		
+		JButton btn_add_art = new JButton("New article");
+		btn_add_art.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btn_add_art.setBounds(228, 405, 169, 55);
+		panel_tableau.add(btn_add_art);
+		
+		
+//		setBackground(new Color(245, 255, 250));
+//		setLayout(null);
+//		
+//		ScrollPane scrollPane = new ScrollPane();
+//		scrollPane.setBounds(0, 0, 652, 525);
+//		add(scrollPane);
+//		
+//		String [] header = {"ID","Titre","Résumé", "Date création", "Auteur","Show"};
+//        String[][] data ={
+//                {"1","book","bk","cvbv","fgh","fghj"},
+//                {"2","book","bk","cvbv","fgh","fghj"}
+//        } ;
+//		
+//		table = new JTable(data, header);
+//		table.setBackground(new Color(255, 240, 245));
+//		table.setBounds(0, 0, 652, 525);
+//		add(table);
+//		
+//		JButton button = new JButton("New button");
+//		button.setBounds(259, 446, 117, 29);
+//		add(button);
+		
+		
+
+	}
+}

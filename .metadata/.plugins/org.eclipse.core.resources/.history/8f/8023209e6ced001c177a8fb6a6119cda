@@ -1,0 +1,14 @@
+package view;
+
+import javax.swing.JPanel;
+
+public class add_article extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public add_article() {
+
+	}
+
+}

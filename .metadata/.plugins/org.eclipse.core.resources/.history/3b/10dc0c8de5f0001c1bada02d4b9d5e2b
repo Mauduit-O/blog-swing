@@ -1,0 +1,114 @@
+package view;
+
+import java.awt.Color;
+
+import javax.swing.JPanel;
+
+import model.User;
+
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class Infos_user extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public Infos_user(User user) {
+		setBounds(0, 0,  1400, 805);
+		setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 240, 245));
+		panel.setBounds(0, 0,  1400, 805);
+		panel.setLayout(null);
+		add(panel);
+		
+		JLabel lblNewLabel = new JLabel("Mes informations");
+		lblNewLabel.setFont(new Font("Avenir", Font.PLAIN, 32));
+		lblNewLabel.setBounds(558, 130, 291, 62);
+		panel.add(lblNewLabel);
+		
+		JLabel retour = new JLabel("RETOUR");
+		retour.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				panel.removeAll();
+				Post post = new Post(user);
+				panel.add(post);
+				panel.repaint();
+				panel.revalidate();
+				
+			}
+		});
+		retour.setFont(new Font("Avenir", Font.PLAIN, 18));
+		retour.setBounds(1275, 16, 104, 32);
+		panel.add(retour);
+		
+		JLabel lPrenom = new JLabel("Prénom");
+		lPrenom.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lPrenom.setBounds(530, 311, 147, 43);
+		panel.add(lPrenom);
+		
+		JLabel lNom = new JLabel("Nom");
+		lNom.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lNom.setBounds(530, 235, 147, 43);
+		panel.add(lNom);
+		
+		JLabel lEmail = new JLabel("Email");
+		lEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lEmail.setBounds(530, 400, 147, 43);
+		panel.add(lEmail);
+		
+		JLabel lPwd = new JLabel("Mot de passe");
+		lPwd.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		lPwd.setBounds(530, 493, 147, 43);
+		panel.add(lPwd);
+		
+		JLabel userNom = new JLabel("Nom");
+		userNom.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		userNom.setBounds(764, 235, 238, 43);
+		panel.add(userNom);
+		
+		JLabel UserPrenom = new JLabel("Prénom");
+		UserPrenom.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		UserPrenom.setBounds(764, 311, 245, 43);
+		panel.add(UserPrenom);
+		
+		JLabel UserEmail = new JLabel("Email");
+		UserEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		UserEmail.setBounds(764, 400, 245, 43);
+		panel.add(UserEmail);
+		
+		JLabel UserPwd = new JLabel("**************");
+		UserPwd.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
+		UserPwd.setBounds(764, 493, 245, 43);
+		panel.add(UserPwd);
+		
+		JButton btn_modif = new JButton("MODIFIER");
+		btn_modif.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		btn_modif.setBackground(new Color(255, 255, 255));
+		btn_modif.setFont(new Font("Avenir", Font.PLAIN, 14));
+		btn_modif.setBounds(530, 599, 147, 49);
+		panel.add(btn_modif);
+		
+		JButton btn_supp = new JButton("SUPPRIMER");
+		btn_supp.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		btn_supp.setBackground(new Color(255, 255, 255));
+		btn_supp.setFont(new Font("Avenir", Font.PLAIN, 14));
+		btn_supp.setBounds(729, 599, 147, 49);
+		panel.add(btn_supp);
+
+	}
+}

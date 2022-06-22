@@ -1,0 +1,151 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import controller.UserDao;
+import model.User;
+
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.UIManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class Blog extends JFrame {
+
+	private JPanel contentPane_register;
+	private JLayeredPane layer_container;
+	private JPanel panel_connection;
+	private JLayeredPane layeredPane_1;
+	private JPanel panel_inscription;
+	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		 try {
+			    UIManager.setLookAndFeel( UIManager.getCrossPlatformLookAndFeelClassName() );
+			 } catch (Exception e) {
+			            e.printStackTrace();
+			 }
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Blog frame = new Blog();
+					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
+					frame.getContentPane().setLayout(null);
+					frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Blog() {
+		setBounds(0, 0,1400, 900);
+		getContentPane().setLayout(null);
+		contentPane_register = new JPanel();
+		contentPane_register.setBackground(new Color(255, 255, 255));
+		contentPane_register.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane_register);
+		contentPane_register.setLayout(null);
+		
+		JPanel panel_login_logup = new JPanel();
+		panel_login_logup.setLayout(null);
+		panel_login_logup.setBackground(new Color(255, 240, 245));
+		panel_login_logup.setBounds(0, 0, 1400, 39);
+		contentPane_register.add(panel_login_logup);
+		
+		JLabel inscription_menu = new JLabel("INSCRIPTION");
+		inscription_menu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				changePanel(panel_inscription);
+//				layeredPane.removeAll();
+//				layeredPane.add(panel_inscription);
+//				layeredPane.repaint();
+//				layeredPane.revalidate();
+				
+				
+			}
+		});
+		
+		
+		inscription_menu.setFont(new Font("Dialog", Font.BOLD, 16));
+		inscription_menu.setForeground(new Color(255, 182, 193));
+		inscription_menu.setBounds(529, 12, 122, 16);
+		panel_login_logup.add(inscription_menu);
+		
+		JLabel login_menu = new JLabel("CONNECTION");
+		login_menu.setFont(new Font("Dialog", Font.BOLD, 16));
+		login_menu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {				
+				changePanel(panel_connection);
+//				layeredPane.removeAll();
+//				layeredPane.add(panel_connection);
+//				layeredPane.repaint();
+//				layeredPane.revalidate();
+			}
+		});
+		login_menu.setForeground(new Color(255, 182, 193));
+		login_menu.setBounds(824, 12, 130, 16);
+		panel_login_logup.add(login_menu);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 51, 1400, 900);
+		contentPane_register.add(panel);
+		panel.setLayout(null);
+		
+		JLayeredPane layeredPane_1 = new JLayeredPane();
+		layeredPane_1.setBounds(0, 0, 1400, 900);
+		panel.add(layeredPane_1);
+		
+		JPanel panel_inscription_1 = new JPanel();
+		layeredPane_1.setLayer(panel_inscription_1, 0);
+		panel_inscription_1.setBackground(new Color(255, 69, 0));
+		panel_inscription_1.setBounds(0, 0, 1400, 900);
+		layeredPane_1.add(panel_inscription_1);
+		
+		JPanel panel_connexion = new JPanel();
+		layeredPane_1.setLayer(panel_connexion, 0);
+		panel_connexion.setBackground(new Color(240, 128, 128));
+		panel_connexion.setBounds(0, 0, 1400, 900);
+		layeredPane_1.add(panel_connexion);
+		
+
+
+		
+		
+	
+	}
+	
+	public void changePanel(JPanel panel) {
+		layeredPane_1.removeAll();
+		layeredPane_1.add(panel);
+		layeredPane_1.repaint();
+		layeredPane_1.revalidate();
+	}
+}

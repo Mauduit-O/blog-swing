@@ -1,0 +1,91 @@
+package view;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import controller.UserDao;
+import model.User;
+
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.JLayeredPane;
+
+public class Login extends JPanel {
+	private final JLayeredPane panel_connection = new JLayeredPane();
+	private JTextField input_email;
+	private JPasswordField input_pwd;
+
+	/**
+	 * Create the panel.
+	 */
+	public Login() {
+		setBackground(new Color(255, 228, 225));
+		setLayout(null);
+		panel_connection.setBounds(6, 55, 579, 413);
+		//(6, 55, 579, 413);
+		panel_connection.setVisible(true);
+		add(panel_connection);
+		
+		JLabel pwd = new JLabel("Mot de passe");
+		pwd.setBounds(99, 215, 91, 16);
+		panel_connection.add(pwd);
+		
+		JLabel loginTitle = new JLabel("Connection");
+		loginTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 22));
+		loginTitle.setBounds(85, 89, 220, 27);
+		panel_connection.add(loginTitle);
+		
+		JLabel mail = new JLabel("Email");
+		mail.setBounds(99, 148, 61, 16);
+		panel_connection.add(mail);
+		
+		input_email = new JTextField();
+		input_email.setColumns(10);
+		input_email.setBounds(234, 143, 251, 33);
+		panel_connection.add(input_email);
+		
+		input_pwd = new JPasswordField();
+		input_pwd.setBounds(234, 207, 251, 33);
+		panel_connection.add(input_pwd);
+		
+		//JButton btn_login = new JButton("Se connecter");
+	
+		//panel_connection.add(btn_login);
+		
+		JButton btn_login = new JButton("Se connecter");
+		btn_login.setBackground(new Color(255, 255, 255));
+		btn_login.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				UserDao userDao = new UserDao();
+				User user = new User(input_email.getText(), input_pwd.getPassword().toString());
+
+				List<User> accountList = userDao.read();
+
+				for (User e1 : accountList) {
+					System.out.println(e1.getId() + " nom est " +e1.getNom() + e1.getPwd());
+					
+					if (input_email.getText().equals(e1.getMail()) && input_pwd.getPassword().equals(e1.getPwd())) {
+						 System.out.println("ok");
+						JOptionPane.showMessageDialog(btn_login, "connecté");
+					} else {
+						 System.out.println("ko");
+						JOptionPane.showMessageDialog(btn_login, "non connecté");
+					}
+				};
+			}
+		});
+		btn_login.setBackground(Color.WHITE);
+		btn_login.setBounds(236, 300, 200, 50);
+		panel_connection.add(btn_login);
+		//add(btn_login);
+
+	}
+}

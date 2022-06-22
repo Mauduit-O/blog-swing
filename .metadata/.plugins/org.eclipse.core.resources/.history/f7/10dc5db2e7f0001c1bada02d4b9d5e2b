@@ -1,0 +1,113 @@
+package controller;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
+
+import Dao.Database_connection;
+import Dao.Idao;
+import model.User;
+
+public class UserDao implements Idao<User> {
+	
+	Connection connect = new Database_connection().getConnection();
+	
+	@Override
+	public void create(User user) {
+		try { 
+			PreparedStatement insert_user = connect.prepareStatement("INSERT INTO user (nom, prenom, email, pwd) VALUES (?,?,?,PASSWORD(?))");
+	
+				insert_user.setString(1, user.getNom());
+				insert_user.setString(2, user.getPrenom());
+				insert_user.setString(3, user.getMail());
+				insert_user.setString(4, user.getPwd());
+				insert_user.executeUpdate();
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+	@Override
+	public ArrayList<User> read() {
+		ArrayList<User> Listusers = new ArrayList<>();
+		try {
+			 PreparedStatement read_users = connect.prepareStatement("Select * FROM user");
+			 ResultSet rs = read_users.executeQuery();
+			
+			while (rs.next())
+				{
+					User users = new User(rs.getInt("id"),rs.getString("nom"),rs.getString("prenom"),rs.getString("email"),rs.getString("pwd"));
+					Listusers.add(users);
+				}
+			read_users.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			return Listusers;
+	}
+	
+	
+	public boolean verifLogin(String mail, String password) {
+		Boolean bool = false;
+		try {
+			PreparedStatement verifLog = connect.prepareStatement("SELECT * FROM user WHERE email=? AND pwd=PASSWORD(?) ");
+			verifLog.setString(1, mail);
+			verifLog.setString(2, password);
+			
+			ResultSet rs = verifLog.executeQuery();
+			
+			if(rs.next()) {
+				bool = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bool;
+	}
+	
+	public Boolean verifMail(String mail) {
+		Boolean bool = false;
+		try {
+			PreparedStatement verifEmail = connect.prepareStatement("SELECT * FROM user WHERE email=? ");
+			verifEmail.setString(1, mail);
+
+			ResultSet rs = verifEmail.executeQuery();
+			
+			if(rs.next()) {
+			bool = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bool;
+	}
+	
+	
+	public User UserByMail(String mail) {
+		User user = new User();
+		try {
+			PreparedStatement verifEmail = connect.prepareStatement("SELECT * FROM user WHERE email=? ");
+			verifEmail.setString(1, mail);
+
+			ResultSet rs = verifEmail.executeQuery();
+			
+			if(rs.next()) {
+				user.setId(rs.getInt("id"));
+				user.setNom(rs.getString("nom"));
+				user.setPrenom(rs.getString("prenom"));
+				user.setMail(rs.getString("email"));
+				user.setPwd(rs.getString("pwd"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+}

@@ -1,0 +1,39 @@
+package view;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Login extends JPanel {
+	private JTextField input_mail;
+
+	/**
+	 * Create the panel.
+	 */
+	public Login() {
+		setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(111, 232, 61, 16);
+		add(lblNewLabel);
+		
+		JLabel loginTitle = new JLabel("Connection");
+		loginTitle.setBounds(248, 58, 105, 16);
+		add(loginTitle);
+		
+		JLabel lblNewLabel_1_1 = new JLabel("New label");
+		lblNewLabel_1_1.setBounds(111, 165, 61, 16);
+		add(lblNewLabel_1_1);
+		
+		input_mail = new JTextField();
+		input_mail.setBounds(235, 160, 262, 26);
+		add(input_mail);
+		input_mail.setColumns(10);
+
+	}
+	private static class __Tmp {
+		private static void __tmp() {
+			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
+		}
+	}
+}

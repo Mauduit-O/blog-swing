@@ -1,0 +1,183 @@
+package view;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import controller.UserDao;
+import model.User;
+
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.UIManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class Blog extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField input_name;
+	private JTextField input_prenom;
+	private JTextField Input_mail;
+	private JPasswordField input_mdp;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Blog frame = new Blog();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Blog() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 591, 502);
+		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel_login_logup = new JPanel();
+		panel_login_logup.setLayout(null);
+		panel_login_logup.setBackground(new Color(255, 228, 196));
+		panel_login_logup.setBounds(56, 10, 477, 29);
+		contentPane.add(panel_login_logup);
+		
+		JLabel inscription_menu = new JLabel("Inscription");
+		inscription_menu.setForeground(new Color(255, 165, 0));
+		inscription_menu.setBounds(112, 6, 85, 16);
+		panel_login_logup.add(inscription_menu);
+		
+		JLabel login_menu = new JLabel("Connection");
+		login_menu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				contentPane.removeAll();
+				Login login = new Login();
+				contentPane.add(login);
+				contentPane.repaint();
+				contentPane.revalidate();
+			}
+		});
+		login_menu.setForeground(new Color(255, 165, 0));
+		login_menu.setBounds(273, 6, 109, 16);
+		panel_login_logup.add(login_menu);
+		
+		JLayeredPane panel_inscription = new JLayeredPane();
+		panel_inscription.setBounds(6, 55, 579, 413);
+		contentPane.add(panel_inscription);
+		panel_inscription.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(new Color(250, 235, 215));
+		panel.setBounds(0, 6, 581, 407);
+		panel_inscription.add(panel);
+		
+		JLabel name = new JLabel("Nom");
+		name.setFont(new Font("Avenir", Font.PLAIN, 13));
+		name.setBounds(121, 67, 82, 16);
+		panel.add(name);
+		
+		input_name = new JTextField();
+		input_name.setColumns(10);
+		input_name.setBounds(243, 62, 186, 26);
+		panel.add(input_name);
+		
+		
+		JLabel prenom = new JLabel("Prenom");
+		prenom.setFont(new Font("Avenir", Font.PLAIN, 13));
+		prenom.setBounds(121, 132, 82, 16);
+		panel.add(prenom);
+		
+		input_prenom = new JTextField();
+		input_prenom.setColumns(10);
+		input_prenom.setBounds(243, 126, 186, 26);
+		panel.add(input_prenom);
+		
+		JLabel email = new JLabel("Email");
+		email.setFont(new Font("Avenir", Font.PLAIN, 13));
+		email.setBounds(121, 194, 82, 16);
+		panel.add(email);
+		
+		Input_mail = new JTextField();
+		Input_mail.setColumns(10);
+		Input_mail.setBounds(243, 189, 186, 26);
+		panel.add(Input_mail);
+		
+		JLabel mdp = new JLabel("Mot de passe");
+		mdp.setFont(new Font("Avenir", Font.PLAIN, 13));
+		mdp.setBounds(121, 250, 110, 16);
+		panel.add(mdp);
+		
+		input_mdp = new JPasswordField();
+		input_mdp.setBounds(243, 245, 186, 26);
+		panel.add(input_mdp);
+		
+		JButton btn_creer = new JButton("Créer mon compte");
+		btn_creer.setBackground(new Color(255, 140, 0));
+		btn_creer.setBounds(210, 322, 168, 29);
+	
+		btn_creer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				UserDao userDao = new UserDao();
+				User user = new User(input_name.getText(), input_prenom.getText(), Input_mail.getText(), String.valueOf(input_mdp.getPassword()));
+				//userDao.create(user);
+			
+				if(userDao.create(user)) {
+					 System.out.println("ok");
+					JOptionPane.showMessageDialog(btn_creer, "Bravo");
+					
+				
+					contentPane.removeAll();
+					Login login = new Login();
+					contentPane.add(login);
+					contentPane.repaint();
+					contentPane.revalidate();
+					
+				} else {
+					 System.out.println("ko");
+					JOptionPane.showMessageDialog(btn_creer, "Ko");
+				}
+				
+			}
+		});
+		panel.add(btn_creer);
+
+		
+	
+		
+		
+	}
+	
+//	public void changePanel(JPanel panel) {
+//		layeredPane.removeAll();
+//		layeredPane.add(panel);
+//		layeredPane.repaint();
+//		layeredPane.revalidate();
+//	}
+}

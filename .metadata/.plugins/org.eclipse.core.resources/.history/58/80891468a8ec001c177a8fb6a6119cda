@@ -1,0 +1,62 @@
+package view;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import controller.UserDao;
+import model.User;
+
+import javax.swing.JPasswordField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.JLayeredPane;
+
+public class Login extends JPanel {
+	private final JLayeredPane panel_connection = new JLayeredPane();
+	private JTextField textField;
+	private JPasswordField passwordField;
+
+	/**
+	 * Create the panel.
+	 */
+	public Login() {
+		setBackground(new Color(255, 228, 225));
+		setLayout(null);
+		panel_connection.setBounds(6, 6, 594, 483);
+		add(panel_connection);
+		
+		JLabel pwd = new JLabel("Mot de passe");
+		pwd.setBounds(99, 215, 91, 16);
+		panel_connection.add(pwd);
+		
+		JLabel loginTitle = new JLabel("Connection");
+		loginTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 22));
+		loginTitle.setBounds(85, 89, 220, 27);
+		panel_connection.add(loginTitle);
+		
+		JLabel mail = new JLabel("Email");
+		mail.setBounds(99, 148, 61, 16);
+		panel_connection.add(mail);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(234, 143, 251, 33);
+		panel_connection.add(textField);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(234, 207, 251, 33);
+		panel_connection.add(passwordField);
+		
+		JButton btn_login = new JButton("Se connecter");
+		btn_login.setBackground(Color.WHITE);
+		btn_login.setBounds(236, 300, 200, 50);
+		panel_connection.add(btn_login);
+
+	}
+}

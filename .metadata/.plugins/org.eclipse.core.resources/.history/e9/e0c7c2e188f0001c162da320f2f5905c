@@ -1,0 +1,161 @@
+package view;
+
+import javax.swing.JPanel;
+//package view;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import controller.ArticleDao;
+import model.Article;
+import model.User;
+
+public class Test extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+		
+
+		private JPanel contentPane;
+		private JTextField titre;
+		private JTextField resume;
+		
+		private JTable table;
+		private JTable table_1;
+		/**
+		 * Create the panel.
+		 */
+		public Test(User user) {
+			setBackground(new Color(204, 255, 204));
+			setBounds(0, 0, 1263, 623);
+			setLayout(null);
+			
+			JPanel panel_1 = new JPanel();
+			panel_1.setBounds(0, 0, 1263, 700);
+			add(panel_1);
+			panel_1.setLayout(null);
+			
+			JPanel panel = new JPanel();
+			panel.setLayout(null);
+			panel.setBackground(new Color(204, 255, 204));
+			panel.setBounds(0, 0, 1263, 689);
+			panel_1.add(panel);
+					
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(57, 111, 1134, 330);
+			panel.add(scrollPane);
+			
+			table = new JTable();
+			table.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+//					int id = table.getSelectedRow();
+//					
+//					// Pour le titre
+//					//Object article_titre =  table.getModel().getValueAt(id, 0);
+//					//System.out.println(article_titre);
+//					
+//					// Pour id
+//					int article_titre =  (int) table.getModel().getValueAt(id, 0);
+//					System.out.println(article_titre);
+//					
+//					
+//					panel_1.removeAll();
+//					ShowPost show = new ShowPost(article_titre);
+//					
+//					panel_1.add(show);
+//
+//					panel_1.repaint();
+//					panel_1.revalidate();
+					
+					//ShowArticle show = new ShowArticle(article_id);
+					//show.setVisible(true);
+				}
+			});
+			scrollPane.setViewportView(table);
+			table.setRowHeight(100);
+			
+			table.setModel(liste());
+			
+			JLabel lbienvenue = new JLabel("Bienvenue ");
+			lbienvenue.setBounds(211, 11, 728, 56);
+			panel.add(lbienvenue);
+			lbienvenue.setHorizontalAlignment(SwingConstants.CENTER);
+			lbienvenue.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 25));
+			
+			JButton ajoutArt = new JButton("Ajout Article");
+			ajoutArt.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panel_1.removeAll();
+					
+					Add_article ajoutArticle = new Add_article(user);
+					
+					panel_1.add(ajoutArticle);
+
+					panel_1.repaint();
+					panel_1.revalidate();
+				}
+			});
+			ajoutArt.setBounds(774, 492, 285, 62);
+			panel.add(ajoutArt);
+			
+			JPanel panel_2 = new JPanel();
+			panel_2.setBounds(43, 465, 612, 135);
+			panel.add(panel_2);
+			panel_2.setLayout(null);
+			
+			JScrollPane scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBounds(0, 0, 1, 1);
+			panel_2.add(scrollPane_1);
+			
+			table_1 = new JTable();
+			scrollPane_1.setViewportView(table_1);
+			table_1.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"New column", "New column", "New column", "New column", "New column", "New column", "New column"
+				}
+			));
+		}
+		
+		public DefaultTableModel liste() {
+			
+			//String [] col = {"Titre","Résumé", "Date création", "Auteur","Show"};
+			String [] col = {"ID","Titre","Résumé", "Date création", "Auteur","Show"};
+			DefaultTableModel tab = new DefaultTableModel(null, col);
+			
+			ArticleDao cliDao = new ArticleDao();
+			
+			List<Article> listArticle = new ArrayList<>();
+			listArticle.addAll(cliDao.read());
+			
+			for (Article article : listArticle) {
+				 
+				 tab.addRow(new Object[] {
+						 article.getId(),
+						 article.getTitre(),
+						 article.getResume(),article.getDate_creation(),article.getAuteur().getPrenom(), "Détail"
+						 });
+			}
+			return tab;
+
+	}
+
+}

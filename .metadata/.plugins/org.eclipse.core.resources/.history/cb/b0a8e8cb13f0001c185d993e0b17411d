@@ -1,0 +1,66 @@
+package view;
+
+import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JButton;
+import java.awt.Color;
+
+public class add_article extends JPanel {
+	private JTextField textField_2;
+
+	/**
+	 * Create the panel.
+	 */
+	public add_article() {
+		setLayout(null);
+		setBounds(0, 55, 1400, 836);
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(0, 0, 1400, 860);
+		add(layeredPane);
+		
+		JPanel panel_ajout_art = new JPanel();
+		panel_ajout_art.setBackground(new Color(255, 240, 245));
+		panel_ajout_art.setBounds(0, 0, 1400, 860);
+		add(panel_ajout_art);
+		panel_ajout_art.setLayout(null);
+		
+		JLabel title_add_article = new JLabel("Ajouter un article");
+		title_add_article.setBounds(277, 5, 185, 27);
+		panel_ajout_art.add(title_add_article);
+		title_add_article.setFont(new Font("Lucida Grande", Font.PLAIN, 22));
+		
+		JLabel label_title = new JLabel("Titre");
+		label_title.setBounds(238, 75, 61, 16);
+		panel_ajout_art.add(label_title);
+		
+		JLabel label_resume = new JLabel("Résumé");
+		label_resume.setBounds(238, 124, 61, 16);
+		panel_ajout_art.add(label_resume);
+		
+		JLabel label_contenu = new JLabel("Contenu");
+		label_contenu.setBounds(238, 241, 61, 16);
+		panel_ajout_art.add(label_contenu);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(311, 65, 166, 37);
+		panel_ajout_art.add(textField_2);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(238, 269, 239, 146);
+		panel_ajout_art.add(textArea);
+		
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setBounds(238, 152, 247, 64);
+		panel_ajout_art.add(textArea_1);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(300, 427, 145, 47);
+		panel_ajout_art.add(btnNewButton);
+
+	}
+}
