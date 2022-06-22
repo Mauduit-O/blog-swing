@@ -11,6 +11,10 @@ public class User {
 	public User() {
 	}
 	
+	public User(int id) {
+		this.id = id;
+	}
+	
 	public User(int id, String nom, String prenom, String mail, String pwd) {
 		this.id = id;
 		this.nom = nom;

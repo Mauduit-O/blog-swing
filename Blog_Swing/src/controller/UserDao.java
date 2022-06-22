@@ -182,9 +182,6 @@ public class UserDao implements Idao<User> {
 		    PreparedStatement delete_user = connect.prepareStatement(queryDElete);
 		    delete_user.setInt(1, i);
 		    delete_user.execute(); 
-//		   delete_etudiant.executeUpdate(); 
-		    
-		    System.out.println("Vous avez supprimer l'utilisateur n° " + i);
 		    delete_user.close();
 		    return true;
 		} catch (SQLException e) {
