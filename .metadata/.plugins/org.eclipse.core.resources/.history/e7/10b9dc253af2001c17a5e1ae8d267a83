@@ -45,14 +45,13 @@ public class Admin extends JPanel {
 			add(panel_tableau);
 			panel_tableau.setLayout(null);
 			
-			JLabel title_tableau = new JLabel("Hello ");
+			JLabel title_tableau = new JLabel("Hello admin " + user.getPrenom());
 			title_tableau.setHorizontalAlignment(SwingConstants.CENTER);
 			title_tableau.setFont(new Font("Montserrat", Font.PLAIN, 34));
 			title_tableau.setBounds(424, 35, 488, 30);
 			panel_tableau.add(title_tableau);
 			
 			JButton btn_add_art = new JButton("New article");
-			btn_add_art.setBorder(null);
 			btn_add_art.setBackground(new Color(255, 240, 245));
 			btn_add_art.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -80,6 +79,7 @@ public class Admin extends JPanel {
 			
 			table_1 = new JTable();
 			table_1.getTableHeader().setBackground(Color.WHITE);
+			//table_1.getTableHeader().setForeground(Color.PINK);
 			scrollPane_1.setViewportView(table_1);
 			table_1.setBackground(new Color(255, 240, 245));
 			table_1.setRowHeight(100);
@@ -90,7 +90,7 @@ public class Admin extends JPanel {
 			Image img;
 			try {
 				img = ImageIO.read(getClass().getResource(imgUrl));
-				JLabel lblCompte = new JLabel("   Admin " + user.getPrenom());
+				JLabel lblCompte = new JLabel("   Compte " + user.getPrenom());
 				lblCompte.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent e) {

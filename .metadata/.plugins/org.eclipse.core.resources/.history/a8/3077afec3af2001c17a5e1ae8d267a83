@@ -123,20 +123,7 @@ public class Infos_user extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				usdDao.update(new User(input_nom.getText(), input_prenom.getText(), input_mail.getText()), user.getId());
-				JOptionPane.showMessageDialog(null, "" + user.getPrenom() + "! \n Vos informations ont bien été modifiés.");
-				if (user.isAdmin() == true) {
-					panel.removeAll();
-					Admin admin = new Admin(user);
-					panel.add(admin);
-					panel.repaint();
-					panel.revalidate();
-				} else {
-					panel.removeAll();
-					Post post = new Post(user);
-					panel.add(post);
-					panel.repaint();
-					panel.revalidate();
-				}
+				
 			}
 		});
 		btn_modif.setBackground(new Color(255, 255, 255));
