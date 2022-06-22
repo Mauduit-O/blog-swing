@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 
 import Dao.Database_connection;
 import Dao.Idao;
-import model.Article;
 import model.Commentaire;
 import model.User;
 
@@ -53,33 +52,12 @@ public class UserDao implements Idao<User> {
 				user.setMail(rs.getString("email"));
 				user.setPwd(rs.getString("pwd"));
 				user.setAdmin(rs.getBoolean("admin"));
-			}
+			} System.out.println(user);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return user;
-	}
-	
-	public List<User> read() {
-		List<User> listeUsers = new ArrayList<>();
-		User user = new User();
-		try {
-			PreparedStatement req = connect.prepareStatement("SELECT * FROM user");
-			ResultSet rs = req.executeQuery();
-			while(rs.next()) {
-				user.setId(rs.getInt("id"));
-				user.setNom(rs.getString("nom"));
-				user.setPrenom(rs.getString("prenom"));
-				user.setMail(rs.getString("email"));
-				user.setPwd(rs.getString("pwd"));
-				user.setAdmin(rs.getBoolean("admin"));
-				listeUsers.add(user);
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		return listeUsers;
 	}
 	
 	

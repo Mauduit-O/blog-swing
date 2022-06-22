@@ -37,6 +37,7 @@ public class ArticleDao implements Idao<Article> {
 		return bool;
 	}
 
+	@Override
 	public List<Article> read() {
 		List<Article> listeArticles = new ArrayList<>();
 		

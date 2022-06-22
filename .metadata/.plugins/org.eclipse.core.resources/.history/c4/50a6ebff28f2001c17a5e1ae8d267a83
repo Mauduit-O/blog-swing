@@ -10,7 +10,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import controller.ArticleDao;
-import controller.UserDao;
 import model.Article;
 import model.User;
 
@@ -33,7 +32,6 @@ import javax.swing.JScrollPane;
 
 public class Post extends JPanel {
 	private JTable table_1;
-	private JLabel Nbr_art_user;
  
 	public Post(User user) {
 		setBackground(new Color(255, 255, 255));
@@ -128,15 +126,15 @@ public class Post extends JPanel {
 			List<Article> listArticle = new ArrayList<>();
 			listArticle.addAll(readArt.read());
 			
-			UserDao userDao = new UserDao();
-			ArrayList<User> listUser = new ArrayList<>();
-			listUser.addAll(userDao.read());
+			ArticleDao articleDao = new ArticleDao();
+			ArrayList<Article> list = new ArrayList<>();
+			list.addAll(articleDao.read());
 
 			
 			
-			JLabel Nbr_art_user = new JLabel("NOMBRE D'ARTICLE: " + listArticle.size() + "     NOMBRE D'UTILISATEUR: " + listUser.size() );
-			Nbr_art_user.setFont(new Font("Avenir", Font.PLAIN, 16));
-			Nbr_art_user.setBounds(57, 634, 650, 34);
+			JLabel Nbr_art_user = new JLabel("NOMBRE D'ARTICLE: " + list.size() + "           NOMBRE D'UTILISATEUr: ");
+			Nbr_art_user.setFont(new Font("Avenir", Font.PLAIN, 18));
+			Nbr_art_user.setBounds(57, 634, 300, 34);
 			panel_tableau.add(Nbr_art_user);
 		}
 		System.out.println("admin: " +user.isAdmin());

@@ -6,4 +6,5 @@ import model.User;
 
 public interface Idao<T>{
 	public boolean create(T object);
+	public List<T> read();
 }
