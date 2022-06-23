@@ -14,8 +14,6 @@
     <fullyQualifiedTypeName name="controller.ArticleDao"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="model.Article"/>
-    <fullyQualifiedTypeName name="model.Commentaire"/>
-    <fullyQualifiedTypeName name="controller.CommentaireDao"/>
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="java.awt.GridLayout"/>
     <fullyQualifiedTypeName name="java.awt.FlowLayout"/>
@@ -28,7 +26,10 @@
     <fullyQualifiedTypeName name="java.awt.Image"/>
     <fullyQualifiedTypeName name="model.User"/>
     <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="controller.UserDao"/>
     <fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
     <fullyQualifiedTypeName name="javax.swing.border.Border"/>
+    <fullyQualifiedTypeName name="controller.UserDao"/>
+    <fullyQualifiedTypeName name="controller.CommentaireDao"/>
+    <fullyQualifiedTypeName name="controller.AdminDao"/>
+    <fullyQualifiedTypeName name="model.Commentaire"/>
 </qualifiedTypeNameHistroy>

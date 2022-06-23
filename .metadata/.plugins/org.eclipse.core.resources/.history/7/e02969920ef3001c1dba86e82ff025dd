@@ -115,17 +115,19 @@ public class Article_details extends JPanel {
 		listAuteur.addAll(artDao.read());
 		for (Article e : listAuteur) {
 			//int us = user.getId();
-//			if ( e.getAuteur().getId() == user.getId()) {
-//				System.out.println("c ok");
-//				
-//			} else {
-//				System.out.println("vous n'étes pas l'auteur de larticle");
-//			}
-//			System.out.println("user"+user.getId());
-//			System.out.println("auteur"+e.getAuteur());
+			if ( e.getAuteur().getId() == (user.getId())) {
+				System.out.println("c ok");
+			} else {
+				System.out.println("vous n'étes pas l'auteur de larticle");
+			}
+			System.out.println("user"+user.getId());
+			System.out.println("auteur"+e.getAuteur());
 	
 		
-			if( user.isAdmin() == true || user.getId() == e.getAuteur().getId() ) {
+
+
+		
+			if( user.isAdmin() ==  true) {
 				JButton btn_modifier = new JButton("MODIFIER");
 				btn_modifier.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -149,8 +151,6 @@ public class Article_details extends JPanel {
 				btn_supprimer.setBackground(Color.WHITE);
 				btn_supprimer.setBounds(450, 699, 143, 44);
 				panel_article.add(btn_supprimer);
-			} else {
-				System.out.println("vous ne pouvez pas modifier larticle");
 			}
 		}
 					

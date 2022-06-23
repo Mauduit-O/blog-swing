@@ -125,6 +125,9 @@ public class Article_details extends JPanel {
 //			System.out.println("auteur"+e.getAuteur());
 	
 		
+
+
+		
 			if( user.isAdmin() == true || user.getId() == e.getAuteur().getId() ) {
 				JButton btn_modifier = new JButton("MODIFIER");
 				btn_modifier.addActionListener(new ActionListener() {

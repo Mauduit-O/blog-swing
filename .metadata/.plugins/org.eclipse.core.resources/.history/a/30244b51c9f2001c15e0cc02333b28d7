@@ -39,7 +39,6 @@ public class Article_details extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	@SuppressWarnings("unlikely-arg-type")
 	public Article_details(int article_id,  User user) {
 		setBounds(0, 0, 1400, 805);
 		setLayout(null);
@@ -114,45 +113,38 @@ public class Article_details extends JPanel {
 		ArrayList<Article> listAuteur = new ArrayList<>();
 		listAuteur.addAll(artDao.read());
 		for (Article e : listAuteur) {
-			//int us = user.getId();
-//			if ( e.getAuteur().getId() == user.getId()) {
-//				System.out.println("c ok");
-//				
-//			} else {
-//				System.out.println("vous n'étes pas l'auteur de larticle");
-//			}
-//			System.out.println("user"+user.getId());
-//			System.out.println("auteur"+e.getAuteur());
-	
-		
-			if( user.isAdmin() == true || user.getId() == e.getAuteur().getId() ) {
-				JButton btn_modifier = new JButton("MODIFIER");
-				btn_modifier.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						artDao.update(new Article(input_titre.getText(), input_resume.getText(), input_contenu.getText()), article_id);
-						JOptionPane.showMessageDialog(null, "" + user.getPrenom() + "! \n Votre article a bien été modifié.");
-					}
-				});
-				btn_modifier.setFont(new Font("Avenir", Font.PLAIN, 14));
-				btn_modifier.setBackground(Color.WHITE);
-				btn_modifier.setBounds(261, 699, 143, 44);
-				panel_article.add(btn_modifier);
-				
-				JButton btn_supprimer = new JButton("SUPPRIMER");
-				btn_supprimer.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						artDao.delete(article_id);
-						JOptionPane.showMessageDialog(null, "" + user.getPrenom() + "! \n Votre article a bien été supprimé.");
-					}
-				});
-				btn_supprimer.setFont(new Font("Avenir", Font.PLAIN, 14));
-				btn_supprimer.setBackground(Color.WHITE);
-				btn_supprimer.setBounds(450, 699, 143, 44);
-				panel_article.add(btn_supprimer);
-			} else {
-				System.out.println("vous ne pouvez pas modifier larticle");
-			}
+			System.out.println(e.getAuteur().getId());
 		}
+//		if (user.getId() ==  e.getAuteur().getId()) {
+//			
+//		}
+		
+		if( user.isAdmin() ==  true) {
+			JButton btn_modifier = new JButton("MODIFIER");
+			btn_modifier.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					artDao.update(new Article(input_titre.getText(), input_resume.getText(), input_contenu.getText()), article_id);
+					JOptionPane.showMessageDialog(null, "" + user.getPrenom() + "! \n Votre article a bien été modifié.");
+				}
+			});
+			btn_modifier.setFont(new Font("Avenir", Font.PLAIN, 14));
+			btn_modifier.setBackground(Color.WHITE);
+			btn_modifier.setBounds(261, 699, 143, 44);
+			panel_article.add(btn_modifier);
+			
+			JButton btn_supprimer = new JButton("SUPPRIMER");
+			btn_supprimer.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					artDao.delete(article_id);
+					JOptionPane.showMessageDialog(null, "" + user.getPrenom() + "! \n Votre article a bien été supprimé.");
+				}
+			});
+			btn_supprimer.setFont(new Font("Avenir", Font.PLAIN, 14));
+			btn_supprimer.setBackground(Color.WHITE);
+			btn_supprimer.setBounds(450, 699, 143, 44);
+			panel_article.add(btn_supprimer);
+		}
+		
 					
 		ArticleDao articleDao = new ArticleDao();
 		ArrayList<Article> list = new ArrayList<>();

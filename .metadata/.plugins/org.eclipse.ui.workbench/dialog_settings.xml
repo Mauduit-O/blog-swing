@@ -10,4 +10,6 @@
 	</section>
 	<section name="EditorSelectionDialog">
 	</section>
+	<section name="org.eclipse.ui.preferences.keysPreferencePage">
+	</section>
 </section>

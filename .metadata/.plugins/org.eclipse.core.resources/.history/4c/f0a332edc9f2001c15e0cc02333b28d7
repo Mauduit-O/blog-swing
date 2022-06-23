@@ -43,7 +43,9 @@ public class User {
 		this.pwd = pwd;
 	}
 	
-	public User( String nom, String prenom, String mail, String pwd, boolean admin) {
+	public User(int id, String nom, String prenom, String mail, String pwd, boolean admin) {
+		super();
+		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
